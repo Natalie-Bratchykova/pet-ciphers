@@ -15,6 +15,7 @@ font-family: 'Kaushan Script', cursive;
   --encrypt-menu-buttons-text-color: #fff;
   --encrypt-menu-buttons-shadow: #505d9a;
   --textarea-text: #fff;
+  --alert-bg-color: #ccc;
 }
 html {
   font-size: 20px;
@@ -295,4 +296,25 @@ body {
 
 .--hiden {
   display: none;
+}
+
+.alert {
+  position: fixed;
+  top: 10rem;
+  left: 20rem;
+  width: 30rem;
+  z-index: 1000;
+  color: var(--main-text-color);
+  background: var(--background-color);
+  border: 1px solid var(--main-text-color);
+  box-shadow: 1.4rem 1rem 0.8rem 0.3rem rgba(0, 0, 0, 0.1);
+}
+.alert__title {
+  text-align: center;
+}
+.alert__buttons {
+  text-align: right;
+}
+.alert__button {
+  background-color: var(--encryption-menu-bg-color);
 }
