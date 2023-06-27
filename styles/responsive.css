@@ -47,6 +47,9 @@
     max-width: 300px;
   }
 
+  .title {
+    margin: 2.5rem 0 5rem;
+  }
   .key__input input {
     width: 10rem;
     padding: 0.2rem;
