@@ -38,6 +38,13 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+      integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body>
     <header class="header">
@@ -159,11 +166,21 @@
                 <div class="knapsack --hiden">
                   <div class="knapsack__keys">
                     <div class="private__key-array key-pairs__group">
-                      <input type="text" class="private-key__input" required />
+                      <input
+                        type="text"
+                        class="private-key__input"
+                        required
+                        id="privateKey"
+                      />
                       <span class="key-pairs__label">Private key</span>
                     </div>
                     <div class="public__key key-pairs__group">
-                      <input type="text" disabled required class="public-key" />
+                      <input
+                        type="text"
+                        required
+                        class="public-key"
+                        id="publicKey"
+                      />
                       <span class="key-pairs__label">Public key</span>
                     </div>
                     <div class="module key-pairs__group">
@@ -288,6 +305,14 @@
         </div>
       </div>
       <div class="overlay --hiden"></div>
+
+      <div class="alert --hiden">
+        <h3 class="alert__title">Error!</h3>
+        <p class="alert__message">Something went wrong!</p>
+        <div class="alert__buttons">
+          <button class="alert__button button" id="accept">Ok</button>
+        </div>
+      </div>
     </main>
     <script src="scripts/app.js" type="module"></script>
   </body>
