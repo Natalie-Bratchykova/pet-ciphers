@@ -44,6 +44,7 @@ let btnDecrypt = document.querySelector("#decrypt");
 const btnCopy = document.querySelector("#copy");
 const textarea = document.querySelector("#textarea");
 const alertWindow = document.querySelector(".alert");
+const alertTitle = document.querySelector(".alert__title");
 const alertMessage = document.querySelector(".alert__message");
 const btnAcceptAlert = document.querySelector("#accept");
 const allButtons = document.querySelectorAll("button");
@@ -80,6 +81,7 @@ class App {
     this.defineKeyType();
     this.closeAlertWindow();
     this.generateAutomaticallyKeys();
+    this.copyText();
   }
 
   openThemeSettings() {
@@ -120,6 +122,7 @@ class App {
     allCipherOptions.forEach((option) => {
       option.addEventListener("click", function (e) {
         title.textContent = e.target.dataset.cipher;
+
         if (title.textContent === App.ciphers.thrithemius) {
           thrithemiusKeySection.classList.remove("--hiden");
         } else {
@@ -141,6 +144,27 @@ class App {
           paralellKey.classList.remove("--hiden");
           knapsackKey.classList.add("--hiden");
           btngenerateKeyPairs.classList.add("--hiden");
+        }
+        if (title.textContent === App.ciphers.knapsack) {
+          paralellKey.classList.add("--hiden");
+          knapsackKey.classList.remove("--hiden");
+          btngenerateKeyPairs.classList.remove("--hiden");
+        } else if (title.textContent === App.ciphers.knapsack) {
+          document
+            .querySelectorAll(".knapsack__additional-numbers")
+            .forEach((btn) => btn.classList.add("--hiden"));
+        } else {
+          paralellKey.classList.remove("--hiden");
+          knapsackKey.classList.add("--hiden");
+          btngenerateKeyPairs.classList.add("--hiden");
+        }
+        if (title.textContent === App.ciphers.rsa) {
+          document
+            .querySelectorAll(".knapsack__additional-numbers")
+            .forEach((btn) => btn.classList.add("--hiden"));
+          paralellKey.classList.add("--hiden");
+          knapsackKey.classList.remove("--hiden");
+          btngenerateKeyPairs.classList.remove("--hiden");
         }
       });
     });
@@ -188,10 +212,12 @@ class App {
           textarea.value,
           inputPublicKey.value.split(",")
         );
+      } else if (title.textContent === App.ciphers.rsa) {
+        textarea.value = rsa.encrypt(textarea.value, inputPublicKey.value);
       }
     });
   }
-  // -- knapsack decryption doesn't work correctly
+
   decrypt() {
     btnDecrypt.addEventListener("click", function (e) {
       e.preventDefault();
@@ -224,10 +250,12 @@ class App {
       } else if (title.textContent === App.ciphers.knapsack) {
         textarea.value = knapsack.decrypt(
           textarea.value,
-          inputPrivateKey.value.split(","),
-          inputM.value,
-          inputN.value
+          inputPrivateKey.value.split(",").map((el) => Number(el)),
+          Number(inputM.value),
+          Number(inputN.value)
         );
+      } else if (title.textContent === App.ciphers.rsa) {
+        textarea.value = rsa.decrypt(textarea.value, inputPrivateKey.value);
       }
     });
   }
@@ -245,11 +273,17 @@ class App {
   generateAutomaticallyKeys() {
     btngenerateKeyPairs.addEventListener("click", (e) => {
       e.preventDefault();
-      let automaticGeneratedKeys = knapsack.generateKeysAutomatically();
-      inputPrivateKey.value = automaticGeneratedKeys.privateKey;
-      inputN.value = automaticGeneratedKeys.n;
-      inputM.value = automaticGeneratedKeys.m;
-      inputPublicKey.value = automaticGeneratedKeys.publicKey;
+      if (title.textContent === App.ciphers.knapsack) {
+        let automaticGeneratedKeys = knapsack.generateKeysAutomatically();
+        inputPrivateKey.value = automaticGeneratedKeys.privateKey;
+        inputN.value = automaticGeneratedKeys.n;
+        inputM.value = automaticGeneratedKeys.m;
+        inputPublicKey.value = automaticGeneratedKeys.publicKey;
+      } else if (title.textContent === App.ciphers.rsa) {
+        let automaticGeneratedKeys = rsa.generateKeys();
+        inputPublicKey.value = automaticGeneratedKeys.publicKey;
+        inputPrivateKey.value = automaticGeneratedKeys.privateKey;
+      }
     });
   }
 
@@ -258,6 +292,18 @@ class App {
       e.preventDefault();
       alertWindow.classList.add("--hiden");
       overlay.classList.add("--hiden");
+    });
+  }
+
+  copyText() {
+    btnCopy.addEventListener("click", function (e) {
+      e.preventDefault();
+      alertWindow.classList.remove("--hiden");
+      alertTitle.textContent = "Copied text";
+      navigator.clipboard.writeText(textarea.value);
+      navigator.clipboard
+        .readText()
+        .then((text) => (alertMessage.textContent = text));
     });
   }
 }
