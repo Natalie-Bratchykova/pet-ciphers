@@ -32,7 +32,7 @@
 
 @media (max-width: 582px) {
   html {
-    font-size: 10px;
+    font-size: 12px;
   }
   .container {
     max-width: 400px;
@@ -41,9 +41,17 @@
 
 @media (max-width: 392px) {
   html {
-    font-size: 6px;
+    font-size: 10px;
   }
   .container {
-    max-width: 200px;
+    max-width: 300px;
+  }
+
+  .key__input input {
+    width: 10rem;
+    padding: 0.2rem;
+  }
+  .key__label {
+    font-size: 1rem;
   }
 }
