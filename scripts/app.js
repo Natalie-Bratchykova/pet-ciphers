@@ -19,7 +19,6 @@ const btnSetColorTheme = document.querySelector("#colorTheme");
 const popupSetColorTheme = document.querySelector(".color-theme");
 const overlay = document.querySelector(".overlay");
 const btnApply = document.querySelector("#apply");
-const btnReset = document.querySelector("#reset");
 const btnClosePopup = document.querySelector(".close__popup");
 const inputColorBg = document.querySelector("#bg");
 const inputColorText = document.querySelector("#ordinaryText");
@@ -32,7 +31,7 @@ const inputColorButtonsText = document.querySelector("#buttonsText");
 const thrithemiusKeySection = document.querySelector(".thrithemius");
 const standartedCiphers = document.querySelector(".standartedCiphers");
 const title = document.querySelector(".title");
-const selectCipherType = document.querySelector("#ciphersDropDown");
+const selectCipherMode = document.querySelector("#ciphersStandard");
 const allCipherOptions = document.querySelectorAll(".dropdown-item");
 const btngenerateKeyPairs = document.querySelector("#generatePublicKey");
 const knapsackKey = document.querySelector(".knapsack");
@@ -44,8 +43,14 @@ let btnEncrypt = document.querySelector("#encrypt");
 let btnDecrypt = document.querySelector("#decrypt");
 const btnCopy = document.querySelector("#copy");
 const textarea = document.querySelector("#textarea");
-
+const alertWindow = document.querySelector(".alert");
+const alertMessage = document.querySelector(".alert__message");
+const btnAcceptAlert = document.querySelector("#accept");
 const allButtons = document.querySelectorAll("button");
+const inputPrivateKey = document.querySelector("#privateKey");
+const inputM = document.querySelector("#m");
+const inputN = document.querySelector("#n");
+const inputPublicKey = document.querySelector("#publicKey");
 allButtons.forEach((btn) =>
   btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -73,6 +78,8 @@ class App {
     this.encrypt();
     this.decrypt();
     this.defineKeyType();
+    this.closeAlertWindow();
+    this.generateAutomaticallyKeys();
   }
 
   openThemeSettings() {
@@ -139,14 +146,21 @@ class App {
     });
   }
 
-  // executes 2 time
   encrypt() {
-    let clicked = 0;
     btnEncrypt.addEventListener("click", function (e) {
-      clicked++;
       e.preventDefault();
       if (title.textContent === App.ciphers.caesar) {
-        textarea.value = caesar.encrypt(textarea.value, Number(keyInput.value));
+        if (/^-?[0-9]+$/.test(keyInput.value)) {
+          textarea.value = caesar.encrypt(
+            textarea.value,
+            Number(keyInput.value)
+          );
+        } else {
+          alertWindow.classList.remove("--hiden");
+          overlay.classList.remove("--hiden");
+          alertMessage.textContent = "Key should include only number";
+          return;
+        }
       } else if (title.textContent === App.ciphers.thrithemius) {
         let isString = radioAsString.checked ? true : false;
         textarea.value = thrithemius.encrypt(
@@ -157,10 +171,27 @@ class App {
       } else if (title.textContent === App.ciphers.xor) {
         let gamma = xor.generateGamma(keyInput.value, textarea.value);
         textarea.value = xor.doCipher(textarea.value, gamma);
+      } else if (title.textContent === App.ciphers.des) {
+        textarea.value = des.encrypt(
+          textarea.value,
+          keyInput.value,
+          selectCipherMode.value
+        ).encryptedText;
+      } else if (title.textContent === App.ciphers.aes) {
+        textarea.value = aes.encrypt(
+          textarea.value,
+          keyInput.value,
+          selectCipherMode.value
+        ).encryptedText;
+      } else if (title.textContent === App.ciphers.knapsack) {
+        textarea.value = knapsack.encrypt(
+          textarea.value,
+          inputPublicKey.value.split(",")
+        );
       }
     });
   }
-
+  // -- knapsack decryption doesn't work correctly
   decrypt() {
     btnDecrypt.addEventListener("click", function (e) {
       e.preventDefault();
@@ -172,6 +203,30 @@ class App {
           textarea.value,
           keyInput.value,
           isString
+        );
+      } else if (title.textContent === App.ciphers.xor) {
+        let gamma = xor.generateGamma(keyInput.value, textarea.value);
+        textarea.value = xor.doCipher(textarea.value, gamma);
+      } else if (title.textContent === App.ciphers.des) {
+        textarea.value = des.decrypt(
+          textarea.value,
+          keyInput.value,
+          selectCipherMode.value,
+          des.encrypt(textarea.value, keyInput.value, selectCipherMode.value).iv
+        );
+      } else if (title.textContent === App.ciphers.aes) {
+        textarea.value = aes.decrypt(
+          textarea.value,
+          keyInput.value,
+          selectCipherMode.value,
+          aes.encrypt(textarea.value, keyInput.value, selectCipherMode.value).iv
+        );
+      } else if (title.textContent === App.ciphers.knapsack) {
+        textarea.value = knapsack.decrypt(
+          textarea.value,
+          inputPrivateKey.value.split(","),
+          inputM.value,
+          inputN.value
         );
       }
     });
@@ -186,8 +241,25 @@ class App {
       }
     });
   }
+
+  generateAutomaticallyKeys() {
+    btngenerateKeyPairs.addEventListener("click", (e) => {
+      e.preventDefault();
+      let automaticGeneratedKeys = knapsack.generateKeysAutomatically();
+      inputPrivateKey.value = automaticGeneratedKeys.privateKey;
+      inputN.value = automaticGeneratedKeys.n;
+      inputM.value = automaticGeneratedKeys.m;
+      inputPublicKey.value = automaticGeneratedKeys.publicKey;
+    });
+  }
+
+  closeAlertWindow() {
+    btnAcceptAlert.addEventListener("click", (e) => {
+      e.preventDefault();
+      alertWindow.classList.add("--hiden");
+      overlay.classList.add("--hiden");
+    });
+  }
 }
 
 const app = new App();
-app.initialize();
-//
