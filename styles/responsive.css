@@ -1,0 +1,49 @@
+/* lg 1200px + */
+@media (min-width: 1200px) {
+}
+/* md 992px + */
+@media (max-width: 992px) {
+  html {
+    font-size: 17px;
+  }
+}
+/* sm 768px +
+@media (min-width: 768px) {
+} */
+/* xs 768px - */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+  .logo__img {
+    width: 3rem;
+    height: 3rem;
+  }
+  .title {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 662px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 582px) {
+  html {
+    font-size: 10px;
+  }
+  .container {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 392px) {
+  html {
+    font-size: 6px;
+  }
+  .container {
+    max-width: 200px;
+  }
+}
