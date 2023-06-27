@@ -12,7 +12,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    
+
     <!-- bootstrap -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
@@ -27,17 +27,28 @@
       crossorigin="anonymous"
     ></script>
     <!-- my styles -->
-    
+
     <link rel="stylesheet" href="styles/theme-style.css" />
     <link rel="stylesheet" href="styles/responsive.css" />
     <link rel="website icon" href="images/header/encryption Key.png" />
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"
+      integrity="sha512-zDvrqenA0eFJZCxBsryzUZcvihvNlEXbteMv62yRxdhR4s7K1aaz+LjsRyfk6M+YJLyAJEuuquIAI8I8GgLC8A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body>
     <header class="header">
       <div class="header__container container">
-        <nav class="header__nav navigation navbar navbar-expand-md ">
+        <nav class="header__nav navigation navbar navbar-expand-md">
           <div class="navigation__logo">
-            <img src="images/header/encryption Key.png" alt="logo"  class="logo__img"/>
+            <img
+              src="images/header/encryption Key.png"
+              alt="logo"
+              class="logo__img"
+            />
             <a href="#" class="navbar-brand navigation__title">Ciphers App</a>
           </div>
           <!-- button for collapsed menu -->
@@ -54,7 +65,9 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav justify-content-end navigation__menu">
               <li class="nav-item">
-                <button  class="nav-link nav__link" id="colorTheme">Color Theme</button>
+                <button class="nav-link nav__link" id="colorTheme">
+                  Color Theme
+                </button>
               </li>
               <!-- dropdown option -->
               <li class="nav-item dropdown">
@@ -69,13 +82,33 @@
                 >
 
                 <ul class="dropdown-menu" aria-labelledby="ciphersDropDowns">
-                  <li><a href="#" class="dropdown-item" data-cipher="Caesar"> Caesar</a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="Thrithemius">Thrithemius<a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="XOR">XOR</a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="DES">DES</a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="AES">AES</a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="Knapsack">Knapsack</a></li>
-                  <li><a href="#" class="dropdown-item" data-cipher="RSA">RSA</a></li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="Caesar">
+                      Caesar</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="Thrithemius"
+                      >Thrithemius</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="XOR">XOR</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="DES">DES</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="AES">AES</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="Knapsack"
+                      >Knapsack</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown-item" data-cipher="RSA">RSA</a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -87,96 +120,174 @@
       </div>
     </header>
     <main>
-        <div class="container">
-            <h1 class="title">Cipher's name</h1>
+      <div class="container">
+        <h1 class="title">Cipher's name</h1>
 
-            <div class="encryption">
-                <form action="" class="encryption__form form">
-                    <div class="encryption__key key">
-                        <div class="key__input">
-                            <input type="text" class="key" id="key" required autocomplete="on">
-                            <span class="key__label">Key</span>
-                        </div>
-                        <div class="key__format">
-                            <div class="thrithemius --hiden">
-                                <div class="key__radio">
-                                    <input type="radio" name="keyData" id="string">
-                                    <label for="string">As string</label>
-                                </div>
-                                <div class="key__radio">
-                                    <input type="radio" name="keyData" id="number">
-                                    <label for="number">As number</label>
-                                </div>
-                            </div>
-                            <div class="standartedCiphers --hiden">
-                                <select name="ciphersStandard" id="ciphersStandard">
-                                    <option value="OFB">OFB</option>
-                                    <option value="CTR">CTR</option>
-                                    <option value="CFB">CFB</option>
-                                    <option value="CBC">CBC</option>
-                                    <option value="ECB">ECB</option>
-                                </select>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="form__buttons">
-                        <button class="form__button button" id="encrypt">Encrypt</button>
-                        <button class="form__button button" id="decrypt">Decrypt</button>
-                        <button class="form__button button" id="copy">Copy</button>
-                    </div>
-                </form>
-            </div>
-
-            <textArea class="textarea " id="textarea" placeholder="Input something" ></textArea>
-        </div>
-
-        <div class="color-theme --hiden">
-            <div class="color-theme__container">
-                <div class="color-theme__close">
-                    <button class="close__popup">X</button>
+        <div class="encryption">
+          <form action="" class="encryption__form form">
+            <div class="encryption__key key_frame">
+              <div class="key__input paralell-key__input">
+                <input
+                  type="text"
+                  class="key"
+                  id="key"
+                  required
+                  autocomplete="on"
+                />
+                <span class="key__label">Key</span>
+              </div>
+              <div class="key__format">
+                <div class="thrithemius --hiden">
+                  <div class="key__radio">
+                    <input type="radio" name="keyData" id="string" />
+                    <label for="string">As string</label>
+                  </div>
+                  <div class="key__radio">
+                    <input type="radio" name="keyData" id="number" />
+                    <label for="number">As number</label>
+                  </div>
                 </div>
-                <h4 class="color-theme__title">Set your color theme</h4>
-                <form action="" class="color-theme__form">
-                    <div class="color-theme__options">
-                        <div class="color-theme__option option">
-                            <label for="bg" class="option__title">Background:</label>
-                            <input type="color" name="bg" id="bg" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="ordinaryText" class="option__title">Ordinary text:</label>
-                            <input type="color" name="ordinaryText" id="ordinaryText" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="header" class="option__title">Header:</label>
-                            <input type="color" name="header" id="header" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="textareaBg" class="option__title">Textarea background:</label>
-                            <input type="color" name="textareaBg" id="textareaBg" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="textareaText" class="option__title">TextArea text:</label>
-                            <input type="color" name="textareaText" id="textareaText" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="buttonsBg" class="option__title">Button background:</label>
-                            <input type="color" name="buttonsBg" id="buttonsBg" class="color-input">
-                        </div>
-                        <div class="color-theme__option option">
-                            <label for="buttonsText" class="option__title">Button text:</label>
-                            <input type="color" name="buttonsText" id="buttonsText" class="color-input">
-                        </div>
+                <div class="standartedCiphers --hiden">
+                  <select name="ciphersStandard" id="ciphersStandard">
+                    <option value="OFB">OFB</option>
+                    <option value="CTR">CTR</option>
+                    <option value="CFB">CFB</option>
+                    <option value="CBC">CBC</option>
+                    <option value="ECB">ECB</option>
+                  </select>
+                </div>
+                <div class="knapsack --hiden">
+                  <div class="knapsack__keys">
+                    <div class="private__key-array key-pairs__group">
+                      <input type="text" class="private-key__input" required />
+                      <span class="key-pairs__label">Private key</span>
                     </div>
-                    <div class="color-theme__buttons">
-                        <button class="color-theme__button button" id="reset">Reset</button>
-                        <button class="color-theme__button button" id="apply">Apply</button>
+                    <div class="public__key key-pairs__group">
+                      <input type="text" disabled required class="public-key" />
+                      <span class="key-pairs__label">Public key</span>
                     </div>
-                    
-                </form>
+                    <div class="module key-pairs__group">
+                      <input type="number" name="" id="m" required />
+                      <span class="key-pairs__label">M</span>
+                    </div>
+                    <div class="number key-pairs__group">
+                      <input type="number" name="" id="n" required />
+                      <span class="key-pairs__label">N</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="form__buttons">
+              <button
+                class="form__button button --hiden"
+                id="generatePublicKey"
+              >
+                Generate public Key
+              </button>
+              <button class="form__button button" id="encrypt">Encrypt</button>
+              <button class="form__button button" id="decrypt">Decrypt</button>
+              <button class="form__button button" id="copy">Copy</button>
+            </div>
+          </form>
         </div>
-        <div class="overlay --hiden"></div>
+
+        <textarea
+          class="textarea"
+          id="textarea"
+          placeholder="Input something"
+        ></textarea>
+      </div>
+
+      <div class="color-theme --hiden">
+        <div class="color-theme__container">
+          <div class="color-theme__close">
+            <button class="close__popup">X</button>
+          </div>
+          <h4 class="color-theme__title">Set your color theme</h4>
+          <form action="" class="color-theme__form">
+            <div class="color-theme__options">
+              <div class="color-theme__option option">
+                <label for="bg" class="option__title">Background:</label>
+                <input type="color" name="bg" id="bg" class="color-input" />
+              </div>
+              <div class="color-theme__option option">
+                <label for="ordinaryText" class="option__title"
+                  >Ordinary text:</label
+                >
+                <input
+                  type="color"
+                  name="ordinaryText"
+                  id="ordinaryText"
+                  class="color-input"
+                />
+              </div>
+              <div class="color-theme__option option">
+                <label for="header" class="option__title">Header:</label>
+                <input
+                  type="color"
+                  name="header"
+                  id="header"
+                  class="color-input"
+                />
+              </div>
+              <div class="color-theme__option option">
+                <label for="textareaBg" class="option__title"
+                  >Textarea background:</label
+                >
+                <input
+                  type="color"
+                  name="textareaBg"
+                  id="textareaBg"
+                  class="color-input"
+                />
+              </div>
+              <div class="color-theme__option option">
+                <label for="textareaText" class="option__title"
+                  >TextArea text:</label
+                >
+                <input
+                  type="color"
+                  name="textareaText"
+                  id="textareaText"
+                  class="color-input"
+                />
+              </div>
+              <div class="color-theme__option option">
+                <label for="buttonsBg" class="option__title"
+                  >Button background:</label
+                >
+                <input
+                  type="color"
+                  name="buttonsBg"
+                  id="buttonsBg"
+                  class="color-input"
+                />
+              </div>
+              <div class="color-theme__option option">
+                <label for="buttonsText" class="option__title"
+                  >Button text:</label
+                >
+                <input
+                  type="color"
+                  name="buttonsText"
+                  id="buttonsText"
+                  class="color-input"
+                />
+              </div>
+            </div>
+            <div class="color-theme__buttons">
+              <button class="color-theme__button button" id="reset">
+                Reset
+              </button>
+              <button class="color-theme__button button" id="apply">
+                Apply
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="overlay --hiden"></div>
     </main>
     <script src="scripts/app.js" type="module"></script>
   </body>
