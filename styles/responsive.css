@@ -7,10 +7,7 @@
     font-size: 17px;
   }
 }
-/* sm 768px +
-@media (min-width: 768px) {
-} */
-/* xs 768px - */
+
 @media (max-width: 768px) {
   html {
     font-size: 15px;
@@ -50,11 +47,31 @@
   .title {
     margin: 2.5rem 0 5rem;
   }
+  .encryption__form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+
   .key__input input {
-    width: 10rem;
+    width: 6rem;
     padding: 0.2rem;
   }
   .key__label {
     font-size: 1rem;
+  }
+
+  .key-pairs__group input,
+  .key-pairs__label,
+  .button {
+    font-size: 0.8rem;
+  }
+  .form__buttons {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  .button {
+    white-space: nowrap;
   }
 }
