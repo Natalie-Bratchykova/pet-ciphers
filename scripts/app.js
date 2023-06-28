@@ -183,6 +183,7 @@ class App {
         } else {
           alertWindow.classList.remove("--hiden");
           overlay.classList.remove("--hiden");
+          alertTitle.textContent = "Error!";
           alertMessage.textContent = "Key should include only number";
           return;
         }
