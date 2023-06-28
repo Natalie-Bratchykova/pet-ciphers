@@ -82,6 +82,7 @@ class App {
     this.closeAlertWindow();
     this.generateAutomaticallyKeys();
     this.copyText();
+    this.dragAndDropFile();
   }
 
   openThemeSettings() {
@@ -304,6 +305,24 @@ class App {
       navigator.clipboard
         .readText()
         .then((text) => (alertMessage.textContent = text));
+    });
+  }
+
+  dragAndDropFile() {
+    textarea.addEventListener("dragover", function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "copy";
+    });
+    textarea.addEventListener("drop", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      let file = e.dataTransfer.files[0];
+      let reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function () {
+        textarea.value = reader.result;
+      };
     });
   }
 }
