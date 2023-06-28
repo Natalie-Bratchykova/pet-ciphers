@@ -303,7 +303,8 @@ body {
 .alert {
   position: fixed;
   top: 10rem;
-  left: 20rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: 30rem;
   z-index: 1000;
   color: var(--main-text-color);
