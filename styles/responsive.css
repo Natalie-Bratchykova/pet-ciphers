@@ -25,6 +25,9 @@
   html {
     font-size: 13px;
   }
+  .alert {
+    width: 17rem;
+  }
 }
 
 @media (max-width: 582px) {
