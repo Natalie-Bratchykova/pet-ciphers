@@ -2,7 +2,6 @@
 /* 
 font-family: 'Kanit', sans-serif;
 font-family: 'Kaushan Script', cursive;
-
 */
 
 :root {
@@ -27,12 +26,18 @@ body {
   font-family: "Kanit", sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 /* header */
 .header {
   width: 100%;
   background: var(--header-bg-color);
 }
-
+.container {
+  max-width: 52rem;
+}
 /* navigation */
 .navigation__logo {
   display: flex;
@@ -67,18 +72,17 @@ body {
 
 /* main */
 .title {
-  margin-top: 2%;
+  margin: 2.7rem 0 1.3rem;
   font-size: 6rem;
   font-family: "Kaushan Script", cursive;
   color: var(--main-text-color);
 }
-
 /* key setting  */
 .encryption {
   margin-top: 3%;
   background-color: var(--encryption-menu-bg-color);
   border-radius: 1rem;
-  padding: 2rem;
+  padding: 1.2rem;
 }
 .encryption__form {
   display: flex;
@@ -90,7 +94,6 @@ body {
   display: flex;
   align-items: center;
 }
-
 .key__radio {
   white-space: nowrap;
   margin-left: 1rem;
@@ -170,7 +173,6 @@ body {
   border-radius: 1rem;
   max-width: 7rem;
 }
-
 .key-pairs__label {
   position: absolute;
   left: 1rem;
@@ -214,7 +216,7 @@ body {
   border: none;
   border-radius: 2rem;
   width: 100%;
-  height: 20rem;
+  height: 15rem;
   background-color: var(--encryption-menu-bg-color);
   resize: none;
   padding: 2rem;
@@ -312,6 +314,13 @@ body {
 .alert__title {
   text-align: center;
 }
+.alert__message {
+  white-space: wrap;
+  word-break: break-all;
+  max-height: 10rem;
+  overflow: scroll;
+}
+
 .alert__buttons {
   text-align: right;
 }
